@@ -38,6 +38,8 @@ public:
 		void UpdateMappedActors();
 	UFUNCTION(CallInEditor, Category = "LightAct project")
 		void LogLightActObjectID();
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Debug")
+		bool bwriteDebugLog = false;
 
 protected:
 	// Called when the game starts or when spawned

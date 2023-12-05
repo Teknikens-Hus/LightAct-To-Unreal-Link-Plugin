@@ -122,8 +122,10 @@ TArray<TSharedPtr<FJsonValue>> AALightActTransformToUnreal::GetLightActObjects()
 	TSharedPtr<FJsonObject> JsonObject;
 	if (LoadJsonFromFile(TempPath, JsonObject))
 	{
-		UE_LOG(LogTemp, Log, TEXT("Loading file %s"), *TempPath);
-
+		if(bwriteDebugLog)
+		{
+			UE_LOG(LogTemp, Log, TEXT("Loading file %s"), *TempPath);
+		}
 		// Access the "Viewport" key
 		TSharedPtr<FJsonObject> ViewportObject = JsonObject->GetObjectField("Viewport");
 		if (ViewportObject.IsValid())
@@ -210,7 +212,11 @@ void AALightActTransformToUnreal::UpdateMappedActors() {
 						Actor->SetActorRotation(ObjectRotQuat);
 						// Set the actor's scale
 						Actor->SetActorScale3D(ObjectSize);
-						UE_LOG(LogTemp, Log, TEXT("Updated actor %s with tag %s"), *Actor->GetName(), *Actor->Tags[0].ToString());
+						if(bwriteDebugLog)
+						{
+							UE_LOG(LogTemp, Log, TEXT("Updated actor %s with tag %s"), *Actor->GetName(), *Actor->Tags[0].ToString());
+						}
+						
 					}
 				}
 			}
